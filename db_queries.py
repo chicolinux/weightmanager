@@ -22,3 +22,15 @@ class DB_Queries:
         cnx.commit()
         cursor.close()
         return id
+
+
+    def get_weight_his(self, cnx):
+        weights = list()
+        cursor = cnx.cursor()
+        query = ("select id, weight from weight_his order by date")
+        cursor.execute(query)
+        for (id, weight) in cursor:
+            #print(weight, type(weight))
+            weights.append(weight)
+        cursor.close()
+        return weights

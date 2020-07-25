@@ -1,7 +1,9 @@
 import db_conn
 import db_queries as queries
+import bcolors
 import math
 import datetime as dt
+import matplotlib.pyplot as plt
 
 # Start Global Section *******************************************
 db = db_conn.DB_Conn()
@@ -33,7 +35,7 @@ def task_selection():
 
 def print_header():
     print("************************************************")
-    print("*  Welcome to the Weight Manager Application!  *")
+    print(f"{bcolors.bcolors.OKBLUE}*  Welcome to the Weight Manager Application!  *{bcolors.bcolors.ENDC}")
     print("************************************************")
     print()
 
@@ -67,7 +69,18 @@ def save_weight_data(weight, bmi):
     today_date = dt.date.today()
     id = q.save_weight_data_2db(today_date=today_date, weight=weight, bmi=bmi, cnx=cnx)
     print("Saved?", id)
-    pass
+
+
+def visualize_weight_his(y):
+    n = len(y)
+    x = list(range(n))
+    plt.plot(x, y, 'go--', linewidth=2, markersize=12)
+    for a, b in zip(x, y):
+        plt.text(a, b, str(b))
+    plt.title("Your weight trend! Keep up the hard work!")
+    plt.xlabel("Measurements")
+    plt.ylabel("Weight (Kg)")
+    plt.show()
 
 
 def main():
@@ -81,6 +94,9 @@ def main():
         weight = capture_weight_measurement()
         bmi = calculate_bmi(weight, current_height)
         save_weight_data(weight, bmi)
+    elif task == 1:
+        weights = q.get_weight_his(cnx=cnx)
+        visualize_weight_his(weights)
 
     # Closing DB connecttion
     cnx.close()
