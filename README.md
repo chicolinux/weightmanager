@@ -7,3 +7,6 @@ Technologies used:
 * Python 3
 * MySQL 8.0
 * Matplotlib
+
+You can also visualize with the help of a graph, how are you doing with all that hard work. See the trend of your weight historically.
+
