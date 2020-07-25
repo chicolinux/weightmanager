@@ -10,5 +10,4 @@ Technologies used:
 
 You can also visualize with the help of a graph, how are you doing with all that hard work. See the trend of your weight historically.
 
-![Tracking your weight]
 ![Tracking your weight!](Figure_1.png)
